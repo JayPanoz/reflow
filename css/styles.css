@@ -544,10 +544,6 @@ i, em, cite {
       margin: 1rem 0;
     }
 
-    .flex-2 > label:first-child {
-      margin-top: 0;
-    }
-
     label {
       text-align: right;
       display: flex;
