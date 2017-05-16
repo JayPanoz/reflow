@@ -40,7 +40,7 @@ r(function() {
   var section = document.getElementsByTagName('section')[0];
 
   header.addEventListener('click', scrollCover, false);
-  header.addEventListener('touchend', scrollCover, false);
+//  header.addEventListener('touchend', scrollCover, false);
 
   function scrollCover() {
     if (isFirefox) {
