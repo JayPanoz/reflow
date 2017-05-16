@@ -329,7 +329,7 @@ p {
   font-feature-settings: "kern", "liga", "clig", "dlig", "ss01";
 }
 
-footer > p {
+footer > p:first-child {
   font-feature-settings: "kern", "liga", "clig", "pnum", "lnum", "case";
 }
 
