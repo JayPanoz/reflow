@@ -483,8 +483,8 @@ i, em, cite {
   }
 
   .full-width > figcaption {
-    grid-column: main;
-    padding: 0;
+    grid-column: full;
+    padding: 0 1.25rem;
   }
 
   .article-settings,
@@ -532,7 +532,7 @@ i, em, cite {
     }
 
     .flex-2 > label {
-      margin: 1.5rem 0;
+      margin: 1rem 0;
     }
 
     .flex-2 > label:first-child {
@@ -553,6 +553,7 @@ i, em, cite {
     .demo-settings {
       grid-column: full-start / main-start;
       align-items: start;
+      margin-top: 1rem;
     }
 
     .gutter {
@@ -576,7 +577,7 @@ i, em, cite {
     .floating-caption > figcaption {
       order: -1;
       grid-column: full-start / main-start;
-      padding-left: 1.25rem;
+      padding: 0 0 0 1.25rem;
     }
 
     .grid-2 {
