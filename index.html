@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>L’ebook reflowable text</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <noscript>
+    <style type="text/css">
+      .demo {display: none;}
+      .article-settings{display: none;}
+      .warning {display: block;}
+    </style>
+  </noscript>
+</head>
+<body>
+<main>
+  <header>
+    <h1>L’ebook redistribuable</h1>
+
+    <p class="lead">Une introduction rapide et interactive à l’usage des&nbsp;éditeurs, graphistes et simples&nbsp;curieux.</p>
+
+    <p class="author">Par Jiminy Panoz</p>
+  </header>
+
+  <aside class="warning">
+    <p>Il semblerait que JavaScript ne soit pas activé dans votre navigateur.</p>
+
+    <p>Les démonstrations interactives ont par conséquent été désactivées.</p>
+  </aside>
+
+  <section>
+    <div class="article-settings">
+      <label>
+        <input type="checkbox" name="article" value="tldr-on" /><span class="checker"></span> <span>Mode Scan</span>
+      </label>
+    </div>
+
+    <h2>Introduction</h2>
+
+    <p>On parle très souvent de formats, de modèles économiques, de parts de marché, d’enrichissement ou de disruption mais nous en oublions souvent un essentiel&nbsp;: le design.</p>
+
+    <p>Au cours de ces dernières années, j’ai pu me rendre compte que beaucoup d’éditeurs et de graphistes se sentaient perdus à ce sujet.</p>
+
+    <p>Qu’est-il possible de faire et comment&nbsp;?</p>
+
+    <p>Est-ce que tel logiciel de <abbr class="sc">P.A.O.</abbr> est capable de le faire directement&nbsp;?</p>
+
+    <p>Pourquoi la mise en page bogue dans telle ou telle application de lecture&nbsp;?</p>
+
+    <p>Est-ce que nous pouvons rajouter quelques interactions&nbsp;?</p>
+
+    <p>Quelles contraintes prendre en compte&nbsp;?</p>
+
+    <p>Autant de questions dont les réponses restent vagues et qui demandent très régulièrement des éclaircissements.</p>
+
+    <p>L’objectif de cette page est par conséquent de <mark class="tldr">donner les clés du livre numérique redistribuable</mark>, aussi connu sous le nom d’<i lang="en">ebook reflowable text.</i></p>
+  </section>
+
+  <section>
+    <h2>Le livre numérique, c’est du&nbsp;web</h2>
+
+    <p>Même si nous n’allons pas nous plonger dans les méandres techniques du livre numérique et, plus particulièrement, du standard <abbr class="sc">EPUB</abbr>, il n’est pas inutile de rappeler que celui-ci <mark class="tldr">emprunte les langages du web.</mark></p>
+
+    <p>Un livre numérique au format <abbr class="sc">EPUB</abbr> c’est&nbsp;:</p>
+
+    <ul>
+      <li>une structure en <abbr class="sc">HTML</abbr> (<i lang="en">HyperText Markup Language</i>)&nbsp;;</li>
+      <li>une mise en pages en <abbr class="sc">CSS</abbr> (<i lang="en">Cascading Style Sheets</i>)&nbsp;;</li>
+      <li>des interactions en <abbr class="sc">JS</abbr> (<i lang="en">JavaScript</i>)&nbsp;;</li>
+      <li>des images vectorielles en <abbr class="sc">SVG</abbr> (<i lang="en">Scalable Vector Graphics</i>).</li>
+    </ul>
+
+    <p>La structure <abbr class="sc">HTML</abbr> se présente ainsi :</p>
+
+    <div class="full-width inherit-grid bg-container">
+      <pre><code>&lt;h1&gt;Titre du chapitre&lt;/h1&gt;
+
+&lt;p&gt;Le premier paragraphe de notre chapitre, une &lt;em&gt;emphase&lt;/em&gt; vient accentuer un mot de la phrase.&lt;/p&gt;
+
+&lt;blockquote&gt;
+ &lt;p&gt;Voici le premier paragraphe d’une citation en bloc.&lt;/p&gt;
+ &lt;p&gt;Et voilà le second.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure&gt;
+  &lt;img alt=&quot;description de l’image&quot; src=&quot;../Images/image1.jpg&quot; /&gt;
+  &lt;figcaption&gt;La légende de l’image&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+    </div>
+
+    <p><mark class="tldr">Cette structure permet aux solutions de lecture de comprendre le texte</mark> et de pouvoir faire la différence entre les contenus (titre, citation, illustration, etc.). Cela servira notamment pour la synthèse vocale.</p>
+
+    <p>Quant à la mise en pages <abbr class="sc">CSS</abbr>…</p>
+
+    <div class="full-width inherit-grid bg-container">
+      <pre><code>p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0;
+  text-indent: 1em;
+}</code></pre>
+    </div>
+
+    <p>Dans cet exemple, nous déclarons des styles pour tous les paragraphes de l’ouvrage (taille, interlignage, marges et retrait de la première ligne).</p>
+
+    <figure class="full-width inherit-grid floating-caption">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="assets/1200/fluide-2x.png">
+        <source media="(min-width: 1366px)" srcset="assets/1800/fluide-3x.png">
+        <img alt="Le contenu d’un fichier EPUB affiché à l’écran n’est pas le même en fonction des dimensions de l’écran. Un smartphone affichera moins de contenu qu’une liseuse ou qu’une tablette." src="assets/900/fluide.png" />
+      </picture>
+      <figcaption>Contrairement à un <abbr class="sc">PDF</abbr>, qui est mis à l’échelle, le contenu <abbr class="sc">HTML</abbr> s’adapte automatiquement aux dimensions de&nbsp;l’écran.</figcaption>
+    </figure>
+
+    <p>Il est extrêmement important de faire remarquer que <mark class="tldr">le contenu web est fluide par défaut</mark>&nbsp;: celui-ci est en effet <mark class="tldr">automatiquement redistribué dans la fenêtre du navigateur.</mark> Nous pourrions par exemple le comparer au bloc de texte redistribuable d’InDesign.</p>
+
+    <div class="full-width inherit-grid demo">
+      <div class="demo-settings">
+        <label>
+          <input type="checkbox" name="fluid-demo" value="styled" /><span class="checker"></span> <span>Ajouter des styles</span>
+        </label>
+      </div>
+      <iframe id="fluid-demo" src="demo.html"></iframe>
+    </div>
+
+    <p><mark class="tldr">C’est en stylant que l’on est susceptible de dégrader cette fluidité.</mark></p>
+    
+    <p>Il fut un temps où les designers web utilisaient des dimensions fixes, par exemple 800&nbsp;pixels de large. Ils pouvaient ainsi réaliser des mises en pages plus complexes&nbsp;: colonnes, objets placés au pixel près, etc. Inutile de souligner qu’ils se sont rapidement rendu compte que cette <mark class="tldr">approche de conception reposant sur des dimensions fixes ne pouvait plus fonctionner avec l’avénement des appareils mobiles.</mark></p>
+  </section>
+
+  <section>
+    <h2>Du web à une&nbsp;différence près</h2>
+
+    <p>On entend souvent dire que le livre numérique est une sorte de «&nbsp;site web empaqueté&nbsp;» mais cela ne signifie pas pour autant que tous les navigateurs web sont capables d’ouvrir un fichier <abbr class="sc">EPUB</abbr>. En effet, si les bases sont communes, <mark class="tldr"><abbr class="sc">EPUB</abbr> est une norme qui dispose de ses propres spécifications.</mark></p>
+
+    <p>À l’heure actuelle, seul le navigateur Microsoft Edge prend nativement en charge le format.</p>
+
+    <figure class="gutter" role="presentation">
+      <img alt="" src="assets/900/apps.png" />
+    </figure>
+
+    <p>Aussi, il faut généralement passer par une solution de lecture (appareil dédié, app, service dans le nuage) pour pouvoir accéder au contenu du livre numérique.</p>
+
+    <p>Les solutions modernes empruntent aux navigateurs web leur moteur de rendu, un composant logiciel qui se charge, comme son nom l’indique, du rendu des pages web. On peut ainsi considérer que les solutions de lecture sont des <mark class="tldr">surcouches logicielles qui permettent la prise en charge du format et proposent une interface dédiée à l’activité de lecture.</mark></p>
+
+    <p><mark class="tldr">Ces surcouches s’accompagnent de spécificités (pagination, réglages utilisateurs, etc.)</mark> qui rendent la conception et le développement d’un livre numérique quelque peu différents de ceux d’un site web.</p>
+  </section>
+
+  <section>
+    <h2>Un changement de&nbsp;paradigme</h2>
+
+    <p>Si l’on compare navigateurs web et outils <abbr class="sc">P.A.O</abbr>, force est de constater que <mark class="tldr">les seconds sont largement plus aboutis.</mark></p>
+
+    <p>Les algorithmes de justification des navigateurs web sont simplistes, les fonctionnalités typographiques avancées (fonctionnalités Open Type) sont très récentes et parfois mal supportées, les grilles de composition viennent tout juste d’arriver, le modèle de fragmentation (pagination) est encore inexistant…</p>
+
+    <p>De même, en matière de typographie, césures, veuves et orphelines, et sauts de page proposent un contrôle pour le moins limité en numérique. Bien que les solutions de lecture paginent par défaut, ces choses sont très médiocrement supportées.</p>
+
+    <p>Aussi, <mark class="tldr">il faut bien différencier la «&nbsp;page <abbr class="sc">PDF</abbr>&nbsp;» de la «&nbsp;page <abbr class="sc">EPUB</abbr>&nbsp;».</mark></p>
+
+    <figure class="full-width grid-2" role="group">
+      <figure class="grid-component">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="assets/1200/wysiwyg-2x.png">
+          <source media="(min-width: 1366px)" srcset="assets/1800/wysiwyg-3x.png">
+          <img alt="" src="assets/900/wysiwyg.png" />
+        </picture>
+        <figcaption>Avec le <abbr class="sc">PDF</abbr>, on obtient ce que l’on voit dans le logiciel&nbsp;<abbr class="sc">P.A.O.</abbr></figcaption>
+      </figure>
+
+      <figure class="grid-component">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="assets/1200/wysiwygn-2x.png">
+          <source media="(min-width: 1366px)" srcset="assets/1800/wysiwygn-3x.png">
+          <img alt="" src="assets/900/wysiwygn.png" />
+        </picture>
+        <figcaption>Avec <abbr class="sc">EPUB</abbr>, le contenu est redistribué dans un&nbsp;flux.</figcaption>
+      </figure>
+    </figure>
+
+    <p><mark class="tldr">En <abbr class="sc">EPUB</abbr> redistribuable, il n’y a pas de dimensions fixes donc de pagination prédéfinie, il n’y a pas d’alignement vertical, il n’y a pas non plus d’image à fond perdu qui fragmente un paragraphe ou de note de bas de page.</mark></p>
+
+    <p>Le contenu est redistribué en fonction de la taille de l’écran, les contenus se suivent dans un flux continu et non pas fragmenté, paragraphes et images sont des blocs solides et il n’est pas réellement possible de placer certains contenus arbitrairement.</p>
+
+    <figure class="gutter" role="presentation">
+      <img alt="" src="assets/900/indicateur.png" />
+    </figure>
+
+    <p>De fait, <mark class="tldr">il n’existe rien dans les moteurs de rendu pour gérer la pagination à l’heure actuelle.</mark> La pagination est un <em>hack,</em> une bidouille réalisée à l’aide des outils <abbr class="sc">CSS</abbr> disponibles dans le but de l’imiter.</p>
+
+    <div class="full-width inherit-grid demo">
+      <div class="demo-settings">
+        <label>
+          <input type="checkbox" name="pagination-demo" value="paginated" /><span class="checker"></span> <span>Paginer le texte</span>
+        </label>
+      </div>
+      <iframe id="pagination-demo" src="demo.html"></iframe>
+    </div>
+
+    <p>Les solutions de lecture modernes utilisent très souvent les colonnes <abbr class="sc">CSS</abbr> pour émuler la pagination. Le problème est que cette spécification n’a jamais été conçue pour cela et n’a pas évolué pour permettre les cas d’usages du livre numérique.</p>
+
+    <p><mark class="tldr">Le maquettiste ne met pas en pages, il ne fait que donner des indications.</mark> Il faut oublier le concept de <abbr class="sc">WYSIWYG</abbr> (Ce que l’on voit à l’écran est le résultat final).</p>
+  </section>
+
+  <section>
+    <h2>Pour les développeurs, faire en&nbsp;sorte que tout&nbsp;fonctionne</h2>
+
+    <p>Le rendu <abbr class="sc">EPUB</abbr> est un processus quelque peu complexe dans le sens où paginer une mise en pages définie arbitrairement peut créer de nombreux problèmes. Il n’est ainsi par rare que des <mark class="tldr">solutions de lecture «&nbsp;surchargent&nbsp;» des styles pour régler des bugs d’affichage.</mark></p>
+
+    <p>On parle ici d’<em lang="en">override,</em> soit un remplacement dynamique d’un ou plusieurs styles du fichier <abbr class="sc">EPUB</abbr>. En d’autres termes, c’est comme si les développeurs de la solution de lecture ne prenaient pas en compte ou outrepassaient certaines indications de mise en page.</p>
+
+    <div class="full-width inherit-grid demo">
+      <div class="demo-settings">
+        <label>
+          <input type="checkbox" name="overrides-demo" value="overridden" /><span class="checker"></span> <span>Appliquer les overrides</span>
+        </label>
+      </div>
+      <iframe id="overrides-demo" src="demo.html"></iframe>
+    </div>
+
+    <p>Il faut noter que ces <i lang="en">overrides</i> sont rarement gratuits ; ils sont le plus souvent prévus pour <mark class="tldr">régler des problèmes réels</mark>&nbsp;: images ou textes coupés, mauvais affichage de certaines polices, marges énormes sur des petits écrans, etc.</p>
+
+    <p>Par ailleurs, certaines solutions de lecture se servent des <i lang="en">overrides</i> pour «&nbsp;rattraper le coup&nbsp;» quand des déclarations <abbr class="sc">CSS</abbr> désactivent des réglages utilisateurs ou fonctionnalités.</p>
+
+    <p>Il faut bien comprendre que l’on obtiendra <mark class="tldr">jamais le même résultat partout, il faut oublier le «&nbsp;au pixel près&nbsp;».</mark> D’une part, les moteurs de rendu sont bien incapables de mettre en pages de manière totalement identique. D’autre part, les solutions de lecture gèrent ces contenus différemment.</p>
+
+    <p>Il faut donc accepter la perte de contrôle…</p>
+  </section>
+
+  <section>
+    <h2>Le graphiste propose, l’utilisateur dispose</h2>
+
+    <p>Cette perte de contrôle est d’autant plus certaine que les réglages utilisateurs sont très largement attendus par les lecteurs.</p>
+
+    <figure class="full-width inherit-grid floating-caption">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="assets/1200/font-2x.png">
+        <source media="(min-width: 1366px)" srcset="assets/1800/font-3x.png">
+        <img alt="Les réglages utilisateurs sont accessibles depuis les menus des l’interface de lecture." src="assets/900/font.png" />
+      </picture>
+      <figcaption>Toutes les solutions de lecture ou presque proposent un minimum de réglages&nbsp;utilisateur.</figcaption>
+    </figure>
+
+    <p>Depuis le tout début du livre numérique, ceux-ci peuvent <mark class="tldr">composer le texte à leur convenance</mark>&nbsp;: police et taille de caractères, couleur de fond, marges de la page, interlignage et alignement du texte sont autant de variables sur lesquelles ils peuvent intervenir.</p>
+
+    <figure class="full-width grid-4" role="group" aria-labelledby="settings-cap">
+      <figure class="grid-component">
+        <img alt="Texte noir sur fond blanc, taille de caractères par défaut." src="assets/900/config1.png" />
+      </figure>
+      <figure class="grid-component">
+        <img alt="Texte blanc sur fond noir, taille de caractère minimum." src="assets/900/config2.png" />
+      </figure>
+      <figure class="grid-component">
+        <img alt="Texte noir sur fond sépia, taille de caractères augmentée." src="assets/900/config3.png" />
+      </figure>
+      <figure class="grid-component">
+        <img alt="Texte blanc sur fond gris, taille de caractère maximale." src="assets/900/config4.png" />
+      </figure>
+      <figcaption id="settings-cap">Il faut prévoir la mise en pages pour des configurations de lecture extrêmement&nbsp;variées.</figcaption>
+    </figure>
+
+    <p>Nous pouvons concevoir ces réglages utilisateurs comme une seconde catégorie d’<i lang="en">overrides,</i> ce qui complique par ailleurs la tâche des développeurs de solutions de lecture.</p>
+
+    <div class="full-width inherit-grid demo">
+      <div class="demo-settings flex-2">
+        <label>
+          <input type="checkbox" name="settings-demo" value="sans" /><span class="checker"></span> <span>Sans serif</span>
+        </label>
+        <label>
+          <input type="checkbox" name="settings-demo" value="night" /><span class="checker"></span> <span>Mode nuit</span>
+        </label>
+      </div>
+      <iframe id="settings-demo" src="demo.html"></iframe>
+    </div>
+
+    <p><mark class="tldr">À noter que les styles générés par les logiciels <abbr class="sc">P.A.O.</abbr> «&nbsp;cassent&nbsp;» souvent certains réglages utilisateurs…</mark> Le lecteur pourra donc se retrouver avec du texte illisible en mode nuit, des polices pas remplacées pour l’italique ou un réglage qui ne fonctionne pas du tout.</p>
+  </section>
+
+  <section>
+    <h2>Une expérience de&nbsp;lecture</h2>
+
+    <p>Concevoir un livre numérique, aussi simple soit-il, <mark class="tldr">dépasse très largement le cadre de la composition et de la mise en pages.</mark></p>
+
+    <p><mark class="tldr">Il faut penser en termes d’expérience de lecture.</mark></p>
+
+    <figure class="full-width grid-2" role="group">
+      <figure class="grid-component">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="assets/1200/search-2x.png">
+          <source media="(min-width: 1366px)" srcset="assets/1800/search-3x.png">
+          <img alt="" src="assets/900/search.png" />
+        </picture>
+        <figcaption>On peut rechercher directement dans le&nbsp;texte.</figcaption>
+      </figure>
+
+      <figure class="grid-component">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="assets/1200/annoter-2x.png">
+          <source media="(min-width: 1366px)" srcset="assets/1800/annoter-3x.png">
+          <img alt="" src="assets/900/annoter.png" />
+        </picture>
+        <figcaption>On peut également annoter et partager ses&nbsp;remarques.</figcaption>
+      </figure>
+    </figure>
+
+    <p>Les solutions de lecture proposent nombre de fonctionnalités dédiées à l’activité de lecture&nbsp;:</p>
+
+    <ul>
+      <li>l’accès à la table des matières&nbsp;;</li>
+      <li>la recherche dans le texte&nbsp;;</li>
+      <li>la définition et la recherche en ligne (d’un mot ou d’une phrase)&nbsp;;</li>
+      <li>l’annotation&nbsp;;</li>
+      <li>le partage&nbsp;;</li>
+      <li>le zoom des tableaux ou images&nbsp;;</li>
+      <li>les notes pop-up&nbsp;;</li>
+      <li>la consultation des seules images que le livre contient (Kindle)&nbsp;;</li>
+      <li>etc.</li>
+    </ul>
+
+    <p>Cela n’est pas sans poser quelques défis de conception… Comment faire en sorte de ne pas interférer avec ces fonctionnalités&nbsp;? Comment dépasser celles-ci pour en apporter d’autres, susceptibles d’améliorer l’expérience de lecture de l’utilisateur&nbsp;?</p>
+
+    <p>Rien que les appels de notes peuvent déjà dégrader cette expérience. Non liés, ils ne permettront pas d’accéder à la note de fin de section&nbsp;; trop petits, ils demanderont à l’utilisateur de s’y reprendre à plusieurs fois avant d’y parvenir sur son appareil tactile.</p>
+
+    <p>Quant aux interactions plus complexes, <mark class="tldr">le support du langage JavaScript n’étant pas obligatoire en <abbr class="sc">EPUB</abbr>, il faudra composer avec cette contrainte et proposer une solution de secours statique pour chaque interaction.</mark></p>
+  </section>
+
+  <section>
+    <h2>Une perte de contrôle, une&nbsp;gamme de&nbsp;possibilités</h2>
+
+    <p>Si nous faisons le bilan, il faut admettre que le livre numérique redistribuable peut désarçoner bien des éditeurs et graphistes rompus aux joutes de l’édition.</p>
+
+    <figure class="full-width inherit-grid floating-caption">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="assets/1200/flux-2x.png">
+        <source media="(min-width: 1366px)" srcset="assets/1800/flux-3x.png">
+        <img alt="L’appareil de lecture n’est de facto qu’un cadre que l’utilisateur déplace sur un volumen." src="assets/900/flux.png" />
+      </picture>
+      <figcaption>Le livre numérique, ce sont des contenus dans un flux continu, manipulés par les solutions de lecture, redistribués de manière dynamique et restylés par le&nbsp;lecteur.</figcaption>
+    </figure>
+
+    <p>Il faut envisager les choses différemment, perdre certaines habitudes, <mark class="tldr">re-penser l’utilisabilité de l’objet imprimé pour l’écran, créer de nouvelles méthodes de conception adaptées aux contraintes de ce nouveau medium…</mark></p>
+
+    <p>Le web étant déjà passé par là, nous pouvons en tirer une leçon importante&nbsp;: il faut épouser l’idée que <mark class="tldr">toutes les solutions de lecture ne sont pas égales en support et en possibilités techniques.</mark></p>
+
+    <p>La réponse est probablement le concept d’amélioration progressive : <mark class="tldr">on construit une base solide qui fonctionne partout puis on l’améliore en fonction des capacités des solutions de lecture.</mark></p>
+
+    <p>Aujourd’hui, nous sommes ainsi capables de simuler l’alignement vertical, de forcer une image à fragmenter un paragraphe dans certaines conditions ou de l’habiller de manière complexe, d’effectuer des transformations sur du texte (e.g. rotation) et de créer des grilles de composition adaptatives.</p>
+
+    <p>Mieux encore, <mark class="tldr"><abbr class="sc">CSS</abbr> et JavaScript disposent de mécanismes pour concevoir cette amélioration progressive au mieux.</mark></p>
+
+    <p>Il y a de l’espoir mais cela demandera le partage des connaissances, beaucoup de recherche utilisateur et, surtout, un effort collectif.</p>
+  </section>
+
+  <section>
+    <h2>Aller plus loin</h2>
+
+    <ul>
+      <li><a href="http://jiminy.chapalpanoz.com">Site de l’auteur</a></li>
+      <li><a href="https://jaypanoz.github.io/pilen2016/#/">Slides «&nbsp;Pourquoi le monde de l’édition devrait s’intéresser au web&nbsp;»</a></li>
+      <li><a href="http://jiminy.chapalpanoz.com/category/editodesignhack/">Série d’articles et de livres «&nbsp;Édito / Design / Hack&nbsp;»</a></li>
+      <li><a href="https://jaypanoz.github.io/ebookcraft2017/#/">Atelier «&nbsp;<i xml:lang="en">ebooks, beta testing, and the apocalypse</i>&nbsp;»</a></li>
+      <li><a href="http://friendsofepub.github.io/Blitz/">Cadre de conception et de développement Blitz</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2017, Jiminy Panoz</p>
+    <p>Typo «&nbsp;<a href="http://vollkorn-typeface.com">Vollkorn</a>&nbsp;» par Friedrich Althausen</p>
+    <p class="footer-links"><a href="https://github.com/JayPanoz/reflow">Consulter la&nbsp;source</a> | <a href="https://github.com/JayPanoz/reflow/issues">Signaler un&nbsp;bug</a></p>
+  </footer>
+</main>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
