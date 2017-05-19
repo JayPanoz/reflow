@@ -42,14 +42,14 @@ r(function() {
   header.addEventListener('click', scrollCover, false);
 
   function scrollCover() {
-    var reflowedStyles = ["font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif; font-weight: bold;", "font-size: 1.25rem", "font-size: 1.5rem", "font-size: 1.25rem", "font-family: 'Vollkorn', 'Sitka Text', Georgia, serif; font-weight: normal"];
+    var reflowedStyles = ["font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;", "font-size: 1.25rem;", "font-size: 1.5rem;", "font-size: 1.25rem;", "font-family: 'Vollkorn', 'Sitka Text', Georgia, serif;"];
     var counter = 0;
     header.style.cssText = reflowedStyles[counter];
     var loopStyles = setInterval(function () {
       counter++;
       header.style.cssText += reflowedStyles[counter];
       if (counter === 5) {
-        header.style.cssText = "";
+        header.removeAttribute('style');
         clearInterval(loopStyles);
         setTimeout(function() {
           if (isFirefox) {
@@ -58,7 +58,6 @@ r(function() {
 			      scrollTo(document.body, section.offsetTop, 600);
 		      };
           header.removeEventListener('click', scrollCover, false);
-          header.removeAttribute('style');
         }, 1000);
       }
     }, 1000);
