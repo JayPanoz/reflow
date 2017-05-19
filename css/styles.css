@@ -113,6 +113,11 @@ body {
   line-height: 1.5;
 }
 
+.sepia {
+  background-color: #f8f1e3;
+  color: #000;
+}
+
 /* Block Sizing + Spacing */
 
 section {
@@ -169,6 +174,11 @@ footer:after {
   right: 0;
   background-color: rgba(246, 246, 246, 0.8);
   z-index: 10;
+}
+
+.sepia header:after,
+.sepia footer:after {
+  background-color: rgba(248, 241, 227, 0.8);
 }
 
 header:after {
@@ -242,6 +252,10 @@ pre {
 
 .bg-container {
   background-color: #E6E8E6;
+}
+
+.sepia .bg-container {
+  background-color: #F7ECD5;
 }
 
 .full-width {
