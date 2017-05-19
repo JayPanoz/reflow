@@ -61,6 +61,7 @@ r(function() {
         }, 1000);
       }
     }, 1000);
+    yoloMode();
   }
 
 	function scrollTo(element, to, duration) {
@@ -73,6 +74,22 @@ r(function() {
 			scrollTo(element, to, duration - 10);
 		}, 10);
 	};
+
+  function yoloMode() {
+    if (document.body.classList.contains('sepia')) {
+      var els = document.querySelectorAll('section p, h2, figcaption, ul');
+      document.body.style.overflowX = "hidden";
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var rot = Math.random() * 1 - 0.5;
+        var tltX = Math.floor(Math.random() * 6) - 1;
+        var tltY = Math.floor(Math.random() * 10) - 1;
+        el.style.cssText = "transform: rotate("+rot+"deg) translate3d("+tltX+"px, "+tltY+"px, 0)";
+      }
+    } else {
+      return;
+    }
+  }
 
 });
 function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
