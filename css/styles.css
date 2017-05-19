@@ -382,6 +382,10 @@ i, em, cite {
   background-color: rgb(255, 255, 0);
 }
 
+.tldr-on.sepia .tldr {
+  background-color: rgb(255, 180, 190);;
+}
+
 /* Complex Layouts */
 
 .full-width {
