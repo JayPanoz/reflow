@@ -42,15 +42,14 @@ r(function() {
   header.addEventListener('click', scrollCover, false);
 
   function scrollCover() {
-    var title = document.getElementsByTagName('h1')[0];
-    var reflowedStyles = ["font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif; font-weight: bold;", "line-height: 1.4", "margin-bottom: 2%; margin-bottom: 2vmin", "font-size: 2rem; font-size: calc(1rem + 2.5vmin)", "font-size: 3rem; font-size: calc(1rem + 3.75vmin)", "font-size: 4rem; font-size: calc(1rem + 6vmin)"];
+    var reflowedStyles = ["font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif; font-weight: bold;", "font-size: 1.25rem", "font-size: 1.5rem", "font-size: 1.25rem", "font-family: 'Vollkorn', 'Sitka Text', Georgia, serif; font-weight: normal"];
     var counter = 0;
-    title.style.cssText = reflowedStyles[counter];
+    header.style.cssText = reflowedStyles[counter];
     var loopStyles = setInterval(function () {
       counter++;
-      title.style.cssText += reflowedStyles[counter];
-      if (counter === 6) {
-        title.style.cssText = "";
+      header.style.cssText += reflowedStyles[counter];
+      if (counter === 5) {
+        header.style.cssText = "";
         clearInterval(loopStyles);
         setTimeout(function() {
           if (isFirefox) {

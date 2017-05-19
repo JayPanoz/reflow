@@ -319,8 +319,8 @@ img {
 /* Typography */
 
 h1 {
-  font-size: 3rem;
-  font-size: calc(1rem + 4.5vmin);
+  font-size: 3em;
+  font-size: calc(1em + 4.5vmin);
   line-height: 1.2;
   font-feature-settings: "kern", "liga", "clig", "dlig", "ss01";
 }
