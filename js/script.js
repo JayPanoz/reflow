@@ -2,6 +2,7 @@ r(function() {
   'use strict';
 
   var menu;
+  var eInkOverlay;
   var reflowedStyles = [
     {st: "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;", ui: "font-ui", bt: "sans-font-ui"}, 
     {st: "font-size: 1.25rem;", ui: "size-ui", bt: "increase-size-ui"}, 
@@ -42,7 +43,60 @@ r(function() {
           + "color: #232222;"
       + "}"
     +"}"
-    +"#settings-ui {"
+    + "@-webkit-keyframes eInk {"
+      + "0% {"
+        + "background-color: transparent;"
+        + "z-index: 50;"
+      + "}"
+      + "33% {"
+        + "background-color: #232222;"
+      + "}"
+      + "50% {"
+        + "background-color: #232222;"
+      + "}"
+      + "70% {"
+        + "background-color: transparent;"
+      + "}"
+      + "80% {"
+        + "background-color: #232222;"
+      + "}"
+      + "100% {"
+        + "background-color: transparent;"
+        + "z-index: -10"
+      + "}"
+    +"}"
+      + "@keyframes eInk {"
+      + "0% {"
+        + "background-color: transparent;"
+        + "z-index: 50;"
+      + "}"
+      + "33% {"
+        + "background-color: #232222;"
+      + "}"
+      + "50% {"
+        + "background-color: #232222;"
+      + "}"
+      + "70% {"
+        + "background-color: transparent;"
+      + "}"
+      + "80% {"
+        + "background-color: #232222;"
+      + "}"
+      + "100% {"
+        + "background-color: transparent;"
+        + "z-index: -10"
+      + "}"
+    +"}"
+    + "#overlay {"
+      + "position: fixed;"
+      + "top: 0;"
+      + "bottom: 0;"
+      + "left: 0;"
+      + "right: 0;"
+      + "z-index: -10;"
+      + "background-color: transparent;"
+    + "}"
+    + "#settings-ui {"
       + "position: absolute;"
       + "top: 1.25rem;"
       + "right: 1.25rem;"
@@ -105,6 +159,10 @@ r(function() {
       + "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;"
       + "padding: 0.3125rem 0.25rem;"
     + "}"
+    + ".trigger {"
+      + "-webkit-animation: eInk 1000ms normal ease-in-out;"
+      + "animation: eInk 1000ms normal ease-in-out;"
+    + "}"
     + "#font-ui .active-ui {"
       + "background-color: #232222;"
       + "color: #F6F6F6;"
@@ -129,7 +187,6 @@ r(function() {
     menu = document.createElement('div');
     menu.id = "settings-ui";
     menu.setAttribute("aria-hidden", "true");
-    frag.appendChild(menu);
 
     for (var i = 0; i < groups.length; i++) {
       var group = document.createElement('div');
@@ -149,8 +206,16 @@ r(function() {
           group.appendChild(button);
         }
       }
-    menu.appendChild(group);
+      menu.appendChild(group);
     }
+  
+    frag.appendChild(menu);
+
+    eInkOverlay = document.createElement('div');
+    eInkOverlay.id = "overlay";
+    eInkOverlay.setAttribute("aria-hidden", "true");
+    frag.appendChild(eInkOverlay);
+
     document.body.insertBefore(frag, document.body.firstChild);
   })();
 
@@ -199,19 +264,20 @@ r(function() {
         if (counter === 5) {
           header.removeAttribute('style');
           clearInterval(loopStyles);
-          var smoothScroll = setTimeout(function() {
-            if (isFirefox) {
-    	        scrollTo(document.getElementsByTagName('html')[0], section.offsetTop, 600);
-		        } else {
-			        scrollTo(document.body, section.offsetTop, 600);
-		        };
+          var triggerOverlay = setTimeout(function() {
+            eInkOverlay.classList.add('trigger');
             header.removeEventListener('click', scrollCover, false);
-            clearTimeout(smoothScroll);
+            clearTimeout(triggerOverlay);
             menu.classList.remove('displayed');
             var killMenu = setTimeout(function() {
               menu.parentElement.removeChild(menu);
+              section.scrollIntoView();
               clearTimeout(killMenu);
             }, 500);
+            var killOverlay = setTimeout(function() {
+              eInkOverlay.parentElement.removeChild(eInkOverlay);
+              clearTimeout(killOverlay);
+            }, 1000);
           }, 1000);
         }
       }, 1000);
@@ -236,17 +302,6 @@ r(function() {
       }, 500);
     }
   }
-
-	function scrollTo(element, to, duration) {
-		if (duration <= 0) return;
-		var difference = to - element.scrollTop;
-		var perTick = difference / duration * 10;
-		setTimeout(function() {
-			element.scrollTop = element.scrollTop + perTick;
-			if (element.scrollTop == to) return;
-			scrollTo(element, to, duration - 10);
-		}, 10);
-	};
 
   function yoloMode() {
     if (document.body.classList.contains('sepia')) {
