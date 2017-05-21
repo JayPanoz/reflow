@@ -91,6 +91,7 @@ r(function() {
     + "}"
     + "#serif-font-ui {"
       + "font-family: 'Vollkorn', 'Sitka Text', Georgia, serif;"
+      + "padding-top: 0.375rem"
     + "}"
     + "#sans-font-ui {"
       + "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;"
@@ -98,11 +99,11 @@ r(function() {
     + "}"
     + "#decrease-size-ui {"
       + "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;"
-      + "font-size: 0.8125rem;"
+      + "padding: 0.3125rem 0.25rem;"
     + "}"
     + "#increase-size-ui {"
       + "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;"
-      + "font-size: 1rem;"
+      + "padding: 0.3125rem 0.25rem;"
     + "}"
     + "#font-ui .active-ui {"
       + "background-color: #232222;"
@@ -121,8 +122,8 @@ r(function() {
     var buttons = [
       {grp: "font-ui", label: "serif-font-ui", txt: "Serif"},
       {grp: "font-ui", label: "sans-font-ui", txt: "Sans"},
-      {grp: "size-ui", label: "decrease-size-ui", txt: "Aa"},
-      {grp: "size-ui", label: "increase-size-ui", txt: "Aa"}
+      {grp: "size-ui", label: "decrease-size-ui", txt: "Aa-"},
+      {grp: "size-ui", label: "increase-size-ui", txt: "Aa+"}
     ];
 
     menu = document.createElement('div');
