@@ -1,8 +1,8 @@
 r(function() {
   'use strict';
 
-  var menu;
-  var eInkOverlay;
+  var menu = document.createElement('div');
+  var eInkOverlay = document.createElement('div');
   var reflowedStyles = [
     {st: "font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;", ui: "font-ui", bt: "sans-font-ui"}, 
     {st: "font-size: 1.25rem;", ui: "size-ui", bt: "increase-size-ui"}, 
@@ -49,16 +49,13 @@ r(function() {
         + "z-index: 50;"
       + "}"
       + "33% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 1);"
       + "}"
       + "50% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 0.8);"
       + "}"
       + "70% {"
-        + "background-color: transparent;"
-      + "}"
-      + "80% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 1);"
       + "}"
       + "100% {"
         + "background-color: transparent;"
@@ -71,16 +68,13 @@ r(function() {
         + "z-index: 50;"
       + "}"
       + "33% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 1);"
       + "}"
       + "50% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 0.8);"
       + "}"
       + "70% {"
-        + "background-color: transparent;"
-      + "}"
-      + "80% {"
-        + "background-color: #232222;"
+        + "background-color: rgba(35, 34, 34, 1);"
       + "}"
       + "100% {"
         + "background-color: transparent;"
@@ -184,7 +178,6 @@ r(function() {
       {grp: "size-ui", label: "increase-size-ui", txt: "Aa+"}
     ];
 
-    menu = document.createElement('div');
     menu.id = "settings-ui";
     menu.setAttribute("aria-hidden", "true");
 
@@ -199,7 +192,7 @@ r(function() {
           var buttonText = document.createTextNode(buttons[j].txt);
           button.appendChild(buttonText);
           button.classList.add('button-ui');
-          if (buttons[j].label == "serif-font-ui") {
+          if (buttons[j].label === "serif-font-ui") {
             button.classList.add('active-ui');
           }
           button.id = buttons[j].label;
@@ -211,7 +204,6 @@ r(function() {
   
     frag.appendChild(menu);
 
-    eInkOverlay = document.createElement('div');
     eInkOverlay.id = "overlay";
     eInkOverlay.setAttribute("aria-hidden", "true");
     frag.appendChild(eInkOverlay);
@@ -235,7 +227,7 @@ r(function() {
       var scope = el.name;
       var addedClass = el.value;
 
-      if (scope == 'article') {
+      if (scope === 'article') {
         document.body.classList.toggle(addedClass); 
       } else {
         var frame = document.getElementById(scope);
@@ -252,39 +244,42 @@ r(function() {
   header.addEventListener('click', scrollCover, false);
 
   function scrollCover() {
-    menu.classList.add('displayed');
+    menu.classList.add('displayed'); // Display Menu -> fade-in
     var counter = 0;
-    var delayMenu = setTimeout(function() {
+    var delayMenu = setTimeout(function() { // Delay menu by 1 second
       choregraphy(counter);
 
-      var loopStyles = setInterval(function () {
+      var loopStyles = setInterval(function () {  // Menu anims every 1 second
         counter++;
         choregraphy(counter);
 
-        if (counter === 5) {
+        if (counter === 5) {  // Last step in the animation
           header.removeAttribute('style');
-          clearInterval(loopStyles);
-          var triggerOverlay = setTimeout(function() {
-            eInkOverlay.classList.add('trigger');
-            header.removeEventListener('click', scrollCover, false);
-            clearTimeout(triggerOverlay);
+          clearInterval(loopStyles); // Kill 1 second interval
+          var removeMenu = setTimeout(function() {  // Delay Hide menu by 1 second
             menu.classList.remove('displayed');
-            var killMenu = setTimeout(function() {
-              menu.parentElement.removeChild(menu);
-              section.scrollIntoView();
-              clearTimeout(killMenu);
-            }, 500);
-            var killOverlay = setTimeout(function() {
-              eInkOverlay.parentElement.removeChild(eInkOverlay);
-              clearTimeout(killOverlay);
-            }, 1000);
-          }, 1000);
-        }
-      }, 1000);
-      clearTimeout(delayMenu);
-    }, 1000);
+            var triggerOverlay = setTimeout(function() {  // Delay eInk-like animation by 750ms
+              eInkOverlay.classList.add('trigger');
+              header.removeEventListener('click', scrollCover, false);
+              var killMenu = setTimeout(function() {  // Delay menu removal by 500ms and scroll 1st section into view
+                menu.parentElement.removeChild(menu);
+                section.scrollIntoView();
+                var killOverlay = setTimeout(function() {   // Delay overlay removal by 500ms
+                  eInkOverlay.parentElement.removeChild(eInkOverlay);
+                  clearTimeout(killOverlay); // Kill timeout for overlay
+                }, 500); // Overlay removal timeout
+                clearTimeout(killMenu); // Kill timeout for menu removal
+              }, 500); // Menu removal timeout
+              clearTimeout(triggerOverlay);  // Kill timeout for eInk-like animation
+            }, 750); // eInk-like animation timeout
+            clearTimeout(removeMenu); // kill timeout for hide menu
+          }, 1000); // Hide menu timeout
+        } // Last step ends here
+      }, 1000); // Menu anims interval
+      clearTimeout(delayMenu); // Kill timeout for delay menu
+    }, 1000); // Delay menu timeout
     yoloMode();
-  }
+  } // end scrollCover
 
   function choregraphy(step) {
     header.style.cssText += reflowedStyles[step].st;
@@ -295,7 +290,7 @@ r(function() {
     }
     var newButton = document.getElementById(reflowedStyles[step].bt);
     newButton.classList.add('active-ui');
-    if (group.id == "size-ui") {
+    if (group.id === "size-ui") {
       var forceRemoveClass = setTimeout(function() {
         newButton.classList.remove('active-ui');
         clearTimeout(forceRemoveClass);
