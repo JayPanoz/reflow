@@ -645,7 +645,6 @@ i, em, cite {
     }
 
     .grid-4 figcaption {
-      grid-column: 1 / 12;
       order: -1;
       grid-column: 1 / span 4;
       grid-row: 1 / span 5;
