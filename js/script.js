@@ -300,7 +300,7 @@ r(function() {
 
   function yoloMode() {
     if (document.body.classList.contains('sepia')) {
-      var els = document.querySelectorAll('section p, h2, figcaption, ul');
+      var els = document.querySelectorAll('section p, h2, figcaption, label, ul');
       document.body.style.overflowX = "hidden";
       for (var i = 0; i < els.length; i++) {
         var el = els[i];
@@ -308,6 +308,9 @@ r(function() {
         var tltX = Math.floor(Math.random() * 6) - 1;
         var tltY = Math.floor(Math.random() * 10) - 1;
         el.style.cssText = "transform: rotate("+rot+"deg) translate3d("+tltX+"px, "+tltY+"px, 0)";
+        if (el.tagName.toLowerCase() === "figcaption" || el.tagName.toLowerCase() === "label") {
+          el.style.cssText += "font-family: 'Comic Sans MS', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;";
+        }
       }
     } else {
       return;
